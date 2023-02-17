@@ -85,7 +85,7 @@ static void wait_process(process_t pid) {
 
 #define NUM_PROGRAMS 100
 
-static const double BENCHMARK_TIME = 5.0;
+static const double BENCHMARK_TIME = 120.0;
 
 int main(int argc, char** argv) {
   // When called as a child-process, the first argument is defined.

@@ -59,7 +59,7 @@ static void join_thread(thread_t thread) {
 
 #define NUM_THREADS 100
 
-static const double BENCHMARK_TIME = 5.0;
+static const double BENCHMARK_TIME = 120.0;
 
 int main() {
   printf("Benchmark: Create/teardown of %d threads...\n", NUM_THREADS);
