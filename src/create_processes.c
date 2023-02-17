@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-static const double BENCHMARK_TIME = 300.0;
+static const double BENCHMARK_TIME = 600.0;
 static const int NUM_PROCESSES = 100;
 
 int main() {

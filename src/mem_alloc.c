@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static const double BENCHMARK_TIME = 300.0;
+static const double BENCHMARK_TIME = 600.0;
 #define NUM_ALLOCS 1000000
 
 static void* s_addresses[NUM_ALLOCS];
