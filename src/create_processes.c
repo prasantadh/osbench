@@ -16,7 +16,7 @@ int main() {
   fflush(stdout);
 
   pid_t processes[NUM_PROCESSES];
-  for (int i = 0; i < 40000; ++i) {
+  for (int i = 0; i < 100000; ++i) {
     // Create all the processes.
     for (int i = 0; i < NUM_PROCESSES; ++i) {
       pid_t pid = fork();
