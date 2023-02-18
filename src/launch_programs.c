@@ -85,22 +85,14 @@ static void wait_process(process_t pid) {
 
 #define NUM_PROGRAMS 100
 
-static const double BENCHMARK_TIME = 1200.0;
-
 int main(int argc, char** argv) {
   // When called as a child-process, the first argument is defined.
   if (argc > 1) {
     exit(0);
   }
 
-  printf("Benchmark: Launch %d programs...\n", NUM_PROGRAMS);
-  fflush(stdout);
-
-  double best_time = 1e9;
-  const double start_t = get_time();
-  while (get_time() - start_t < BENCHMARK_TIME) {
+  for (int i = 0; i < 80000; ++i) {
     process_t processes[NUM_PROGRAMS];
-    const double t0 = get_time();
 
     // Create all the processes.
     for (int i = 0; i < NUM_PROGRAMS; ++i) {
@@ -112,14 +104,7 @@ int main(int argc, char** argv) {
       wait_process(processes[i]);
     }
 
-    double dt = get_time() - t0;
-    if (dt < best_time) {
-      best_time = dt;
-    }
   }
-
-  printf("%f us / program\n", (best_time / (double)NUM_PROGRAMS) * 1000000.0);
-  fflush(stdout);
 
   return 0;
 }
