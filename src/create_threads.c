@@ -59,17 +59,12 @@ static void join_thread(thread_t thread) {
 
 #define NUM_THREADS 100
 
-static const double BENCHMARK_TIME = 1200.0;
+// static const double BENCHMARK_TIME = 1200.0;
 
 int main() {
-  printf("Benchmark: Create/teardown of %d threads...\n", NUM_THREADS);
-  fflush(stdout);
 
-  double best_time = 1e9;
-  const double start_t = get_time();
-  while (get_time() - start_t < BENCHMARK_TIME) {
+  for (int i = 0; i < 40000; ++i) {
     thread_t threads[NUM_THREADS];
-    const double t0 = get_time();
 
     // Create all the child threads.
     for (int i = 0; i < NUM_THREADS; ++i) {
@@ -81,14 +76,7 @@ int main() {
       join_thread(threads[i]);
     }
 
-    double dt = get_time() - t0;
-    if (dt < best_time) {
-      best_time = dt;
-    }
   }
-
-  printf("%f us / thread\n", (best_time / (double)NUM_THREADS) * 1000000.0);
-  fflush(stdout);
 
   return 0;
 }
