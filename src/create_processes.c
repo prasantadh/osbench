@@ -16,12 +16,8 @@ int main() {
   printf("Benchmark: Create/teardown of %d processes...\n", NUM_PROCESSES);
   fflush(stdout);
 
-  double best_time = 1e9;
-  const double start_t = get_time();
-  while (get_time() - start_t < BENCHMARK_TIME) {
-    pid_t processes[NUM_PROCESSES];
-    const double t0 = get_time();
-
+  pid_t processes[NUM_PROCESSES];
+  for (int i = 0; i < 40000; ++i) {
     // Create all the processes.
     for (int i = 0; i < NUM_PROCESSES; ++i) {
       pid_t pid = fork();
@@ -40,14 +36,7 @@ int main() {
       waitpid(processes[i], (int*)0, 0);
     }
 
-    double dt = get_time() - t0;
-    if (dt < best_time) {
-      best_time = dt;
-    }
   }
-
-  printf("%f us / process\n", (best_time / (double)NUM_PROCESSES) * 1000000.0);
-  fflush(stdout);
 
   return 0;
 }
