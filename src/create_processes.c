@@ -12,9 +12,6 @@
 static const int NUM_PROCESSES = 100;
 
 int main() {
-  printf("Benchmark: Create/teardown of %d processes...\n", NUM_PROCESSES);
-  fflush(stdout);
-
   pid_t processes[NUM_PROCESSES];
   for (int i = 0; i < 100000; ++i) {
     // Create all the processes.
