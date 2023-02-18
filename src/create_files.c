@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const double BENCHMARK_TIME = 600.0;
+static const double BENCHMARK_TIME = 1200.0;
 
 // Note: The maximum number of files in a folder for different file systems:
 //  - 65534 (FAT32)
