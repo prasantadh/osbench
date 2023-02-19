@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const double BENCHMARK_TIME = 1200.0;
+// static const double BENCHMARK_TIME = 1200.0;
 
 // Note: The maximum number of files in a folder for different file systems:
 //  - 65534 (FAT32)
@@ -70,9 +70,6 @@ int main(int argc, const char** argv) {
     exit(1);
   }
 
-  printf("Benchmark: Create/delete %d files...\n", NUM_FILES);
-  fflush(stdout);
-
   // Create a path string.
   int hex_len = num_hex_chars(NUM_FILES - 1);
   size_t root_path_len = strlen(argv[1]);
@@ -86,11 +83,7 @@ int main(int argc, const char** argv) {
   file_name[root_path_len] = path_separator();
   file_name[path_len] = 0;
 
-  double best_time = 1e9;
-  const double start_t = get_time();
-  while (get_time() - start_t < BENCHMARK_TIME) {
-    const double t0 = get_time();
-
+  for (int i = 0; i < 1; ++i) {
     for (int file_no = 0; file_no < NUM_FILES; ++file_no) {
       // Construct the file name for this file.
       to_hex(file_no, &file_name[root_path_len + 1], hex_len);
@@ -106,15 +99,7 @@ int main(int argc, const char** argv) {
       // Delete the file.
       delete_file(file_name);
     }
-
-    double dt = get_time() - t0;
-    if (dt < best_time) {
-      best_time = dt;
-    }
   }
-
-  printf("%f us / file\n", (best_time / (double)NUM_FILES) * 1000000.0);
-  fflush(stdout);
 
   free((void*)file_name);
 
