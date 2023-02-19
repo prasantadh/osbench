@@ -83,7 +83,7 @@ int main(int argc, const char** argv) {
   file_name[root_path_len] = path_separator();
   file_name[path_len] = 0;
 
-  for (int i = 0; i < 1; ++i) {
+  for (int i = 0; i < 1000; ++i) {
     for (int file_no = 0; file_no < NUM_FILES; ++file_no) {
       // Construct the file name for this file.
       to_hex(file_no, &file_name[root_path_len + 1], hex_len);
