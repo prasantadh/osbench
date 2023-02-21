@@ -64,7 +64,7 @@ static void delete_file(const char* file_name) {
   remove(file_name);
 }
 
-static const int NLOOPS = 1000;
+static const int NLOOPS = 400;
 
 int main(int argc, const char** argv) {
   if (argc != 2) {
