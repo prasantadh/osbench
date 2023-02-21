@@ -9,12 +9,16 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+static const int NLOOPS = 100000;
 static const int NUM_PROCESSES = 100;
 
 int main() {
+
   pid_t processes[NUM_PROCESSES];
-  for (int i = 0; i < 100000; ++i) {
+  for (int i = 0; i < NLOOPS; ++i) {
     // Create all the processes.
+    const double t0 = get_time();
+
     for (int i = 0; i < NUM_PROCESSES; ++i) {
       pid_t pid = fork();
       if (pid == 0) {
@@ -32,8 +36,12 @@ int main() {
       waitpid(processes[i], (int*)0, 0);
     }
 
+    double dt = get_time() - t0;
+    printf("%f us / process\n", (dt / (double) NUM_PROCESSES) * 1000000.0);
+
   }
 
+  fflush(stdout);
   return 0;
 }
 

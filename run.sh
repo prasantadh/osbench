@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [[ $# -ne 1 ]]; then
-    echo "Usage: $0 <repetitions>"
-    echo "Example: $0 4 to run the benchmark 4 times"
+    echo "Usage: $0 output-folder"
+    echo "Example: $0 data"
     exit 1
 fi
 
@@ -18,15 +18,19 @@ cd ..
 
 # run the benchmark specified number of times
 run() {
-    for i in `seq 1 $2`; do
-        if [[ $file == "out/create_files" ]]; then
-            ./$file /tmp
-        else
-            ./$file
-        fi;
-    done;
+
+    if [[ $file == "out/create_files" ]]; then
+        rm -rf files
+        mkdir files
+        mount -t tmpfs -o size=2G tmpfs `pwd`/files
+        ./$file /tmp
+        umount -f `pwd`/files
+    else
+        ./$file
+    fi;
+
 }
 
 for file in $(find out -maxdepth 1 -executable -type f); do
-    run $file $1;
-done > $(date +%s)-$(uname -r);
+    run $file;
+done > $1/$(uname -r);

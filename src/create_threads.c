@@ -60,10 +60,12 @@ static void join_thread(thread_t thread) {
 #define NUM_THREADS 100
 
 // static const double BENCHMARK_TIME = 1200.0;
+static const int NLOOPS = 100000;
 
 int main() {
 
-  for (int i = 0; i < 100000; ++i) {
+  for (int i = 0; i < NLOOPS; ++i) {
+    const double t0 = get_time();
     thread_t threads[NUM_THREADS];
 
     // Create all the child threads.
@@ -76,7 +78,12 @@ int main() {
       join_thread(threads[i]);
     }
 
+    double dt = get_time() - t0;
+    printf("%f us / thread\n", (dt / (double) NUM_THREADS) * 1000000.0);
+
   }
+
+  fflush(stdout);
 
   return 0;
 }

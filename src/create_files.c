@@ -64,6 +64,8 @@ static void delete_file(const char* file_name) {
   remove(file_name);
 }
 
+static const int NLOOPS = 1000;
+
 int main(int argc, const char** argv) {
   if (argc != 2) {
     printf("Usage: %s root-folder\n", argv[0]);
@@ -83,7 +85,8 @@ int main(int argc, const char** argv) {
   file_name[root_path_len] = path_separator();
   file_name[path_len] = 0;
 
-  for (int i = 0; i < 1000; ++i) {
+  for (int i = 0; i < NLOOPS; ++i) {
+    const double t0 = get_time();
     for (int file_no = 0; file_no < NUM_FILES; ++file_no) {
       // Construct the file name for this file.
       to_hex(file_no, &file_name[root_path_len + 1], hex_len);
@@ -99,6 +102,10 @@ int main(int argc, const char** argv) {
       // Delete the file.
       delete_file(file_name);
     }
+
+    double dt = get_time() - t0;
+    printf("%f us / file\n", (dt / (double) NUM_FILES) * 1000000.0);
+    fflush(stdout);
   }
 
   free((void*)file_name);

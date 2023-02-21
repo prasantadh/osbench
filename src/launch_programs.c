@@ -85,13 +85,16 @@ static void wait_process(process_t pid) {
 
 #define NUM_PROGRAMS 100
 
+static const int NLOOPS = 100000;
+
 int main(int argc, char** argv) {
   // When called as a child-process, the first argument is defined.
   if (argc > 1) {
     exit(0);
   }
 
-  for (int i = 0; i < 80000; ++i) {
+  for (int i = 0; i < NLOOPS; ++i) {
+    const double t0 = get_time();
     process_t processes[NUM_PROGRAMS];
 
     // Create all the processes.
@@ -104,7 +107,11 @@ int main(int argc, char** argv) {
       wait_process(processes[i]);
     }
 
+    double dt = get_time() - t0;
+    printf("%f us / program\n", (dt / (double) NUM_PROGRAMS) * 1000000.0);
+
   }
+  fflush(stdout);
 
   return 0;
 }
