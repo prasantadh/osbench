@@ -31,6 +31,7 @@ run() {
 
 }
 
-for file in $(find out -maxdepth 1 -executable -type f); do
+for file in $(find out -maxdepth 1 -executable -type f | sort); do
+    echo $file `date` > /dev/stderr;
     run $file;
 done > $1/$(uname -r);
