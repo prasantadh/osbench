@@ -5,6 +5,7 @@ if [[ $# -ne 1 ]]; then
     echo "Example: $0 data"
     exit 1
 fi
+mkdir -p $1
 
 # remove the artifacts of previous runs
 rm -rf out
