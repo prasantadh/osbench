@@ -38,10 +38,10 @@ int main() {
 
     double dt = get_time() - t0;
     printf("%f us / process\n", (dt / (double) NUM_PROCESSES) * 1000000.0);
+    fflush(stdout);
 
   }
 
-  fflush(stdout);
   return 0;
 }
 

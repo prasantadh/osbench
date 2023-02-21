@@ -109,9 +109,9 @@ int main(int argc, char** argv) {
 
     double dt = get_time() - t0;
     printf("%f us / program\n", (dt / (double) NUM_PROGRAMS) * 1000000.0);
+    fflush(stdout);
 
   }
-  fflush(stdout);
 
   return 0;
 }
